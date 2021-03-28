@@ -1,0 +1,3 @@
+Artis has albums
+Albums has songs
+User has favorite artis, songs and albums

@@ -8,7 +8,7 @@ public interface PlainDataService<T, P> {
 
     List<T> findAll();
 
-    void save(T t);
+    T save(T t);
 
     void deleteById(P id);
 }

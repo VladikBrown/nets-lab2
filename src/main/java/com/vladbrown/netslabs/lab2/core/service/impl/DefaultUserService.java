@@ -1,11 +1,11 @@
-package com.vladbrown.netslabs.lab2.core.service;
+package com.vladbrown.netslabs.lab2.core.service.impl;
 
 import com.vladbrown.netslabs.lab2.core.domain.entity.User;
 import com.vladbrown.netslabs.lab2.core.domain.repository.UserRepository;
+import com.vladbrown.netslabs.lab2.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -25,12 +25,18 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         userRepository.save(user);
+        return userRepository.findByUserName(user.getUserName()).get();
     }
 
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUserName(username).get();
     }
 }

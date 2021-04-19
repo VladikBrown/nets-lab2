@@ -110,4 +110,17 @@ public class User {
     public void setLikedArtists(Set<Artist> likedArtists) {
         this.likedArtists = likedArtists;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", userName='" + userName + '\'' +
+                ", likedTracks=" + likedTracks +
+                ", likedAlbums=" + likedAlbums +
+                ", likedArtists=" + likedArtists +
+                '}';
+    }
 }

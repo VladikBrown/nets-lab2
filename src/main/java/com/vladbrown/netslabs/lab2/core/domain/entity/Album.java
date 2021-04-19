@@ -1,7 +1,6 @@
 package com.vladbrown.netslabs.lab2.core.domain.entity;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -9,6 +8,7 @@ import java.util.Set;
 public class Album {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -19,7 +19,7 @@ public class Album {
     private String description;
 
     @Column(name = "release_date")
-    private Date releaseDate;
+    private String releaseDate;
 
     @OneToMany(mappedBy = "album")
     private Set<Track> tracks;
@@ -33,8 +33,6 @@ public class Album {
 
     public Album() {
     }
-
-
 
     public Long getId() {
         return id;
@@ -60,11 +58,11 @@ public class Album {
         this.description = description;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return releaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
     }
 
@@ -82,5 +80,13 @@ public class Album {
 
     public void setLikes(Set<User> likes) {
         this.likes = likes;
+    }
+
+    public Set<Track> getTracks() {
+        return tracks;
+    }
+
+    public void setTracks(Set<Track> tracks) {
+        this.tracks = tracks;
     }
 }

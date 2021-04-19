@@ -18,7 +18,7 @@ CREATE TABLE albums
     id           BIGINT PRIMARY KEY NOT NULL,
     name         varchar(100)       NOT NULL UNIQUE,
     description  text,
-    release_date DATE,
+    release_date varchar(100),
     artist_id    BIGINT             NOT NULL,
     CONSTRAINT artist_id_ref FOREIGN KEY (artist_id) REFERENCES artists (id) ON DELETE CASCADE ON UPDATE CASCADE
 );

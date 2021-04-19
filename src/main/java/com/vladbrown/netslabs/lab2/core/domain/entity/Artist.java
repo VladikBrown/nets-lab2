@@ -9,6 +9,7 @@ import java.util.Set;
 public class Artist {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

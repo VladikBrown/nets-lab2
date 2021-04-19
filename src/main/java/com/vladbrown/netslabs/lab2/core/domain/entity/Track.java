@@ -8,6 +8,7 @@ import java.util.Set;
 public class Track {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  app:
+    image: 'lab2:latest'
+    build:
+      context: .
+    container_name: app
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    restart: unless-stopped
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=user
+      - SPRING_DATASOURCE_PASSWORD=resu
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATA_SOURCE_INITIALIZATION_MODE=always
+      - SPRING_DATASOURCE_CONTINUE_ON_ERROR=true
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=resu
+      - POSTGRES_DB=postgres
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+volumes:
+  database-data:

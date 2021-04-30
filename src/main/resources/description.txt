@@ -1,3 +1,44 @@
-Artis has albums
-Albums has songs
-User has favorite artis, songs and albums
+Application allows to create users and manage their musical tastes.
+Artis has albums.
+Albums has tracks.
+User has favorite artists, tracks and albums.
+
+API:
+root host localhost:8080/
+
+User:
+GET /users - returns all users
+POST /users - post user
+
+GET /user/:userId - returns user
+PUT /user/:userId - updates user
+DELETE /user/:userId - deletes user
+PUT /user/:userId/artist/:artistId - makes artist being liked by the user
+PUT /user/:userId/album/:albumId - makes album being liked by the user
+PUT /user/:track/artist/:trackId - makes track being liked by the user
+
+Artist:
+GET /artist - returns all artists
+POST /artist - post artist
+
+GET /artist/:artistId - returns artist
+PUT /artist/:artistId - updates artist
+DELETE /artist/:artistId - deletes artist
+POST /artist/:artistId/album - adds new album related to the artist
+
+Album:
+GET /albums - returns all artists
+//to add album watch artist block
+
+GET /album/:albumId - returns album
+PUT /album/:albumId - updates album
+DELETE /album/:albumId - deletes album
+POST /album/:albumId/track - adds new track related to the artist
+
+Track:
+GET /tracks - returns all tracks
+//to add track watch album block
+
+GET /track/:trackId - returns track
+PUT /tracks/:trackId - updates tracks
+DELETE /tracks/:trackId - deletes tracks

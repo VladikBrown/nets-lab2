@@ -44,17 +44,17 @@ public class UserDetailsController {
         userService.deleteById(Long.valueOf(userId));
     }
 
-    @PutMapping("/user/{userId}/artis/{artistId}")
+    @PutMapping("/{userId}/artis/{artistId}")
     public void likeArtist(@PathVariable String userId, @PathVariable String artistId) {
         artistService.likeArtistByUserId(Long.valueOf(userId), Long.valueOf(artistId));
     }
 
-    @PutMapping("/user/{userId}/album/{albumId}")
+    @PutMapping("/{userId}/album/{albumId}")
     public void likeAlbum(@PathVariable String userId, @PathVariable String albumId) {
         albumService.likeAlbumByUserId(Long.valueOf(userId), Long.valueOf(albumId));
     }
 
-    @PutMapping("/user/{userId}/track/{trackId}")
+    @PutMapping("/{userId}/track/{trackId}")
     public void likeTrack(@PathVariable String userId, @PathVariable String trackId) {
         trackService.likeTrackByUserId(Long.valueOf(userId), Long.valueOf(trackId));
     }

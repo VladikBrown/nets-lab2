@@ -33,7 +33,8 @@ public class ArtistDetailsController {
 
 
     @PostMapping("/{artistId}/album")
-    public void addNewAlbum(@PathVariable String artistId, Album album) {
+    public Artist addNewAlbum(@PathVariable String artistId, Album album) {
         artistService.addNewAlbum(artistId, album);
+        return artistService.findById(Long.valueOf(artistId));
     }
 }

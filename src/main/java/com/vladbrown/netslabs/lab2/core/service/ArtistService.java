@@ -8,4 +8,6 @@ public interface ArtistService extends PlainDataService<Artist, Long> {
     void addNewAlbum(String artistId, Album album);
 
     void likeArtistByUsername(String userName, Long artistId);
+
+    void likeArtistByUserId(Long userId, Long artistId);
 }

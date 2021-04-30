@@ -61,6 +61,14 @@ public class DefaultArtistService implements ArtistService {
         likeArtist(user, artist);
     }
 
+    @Override
+    public void likeArtistByUserId(Long userId, Long artistId) {
+        var user = userRepository.findById(userId).get();
+        var artist = artistRepository.findById(artistId).get();
+
+        likeArtist(user, artist);
+    }
+
     private void likeArtist(User user, Artist artist) {
         user.getLikedArtists().add(artist);
         artist.getLikes().add(user);

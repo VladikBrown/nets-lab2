@@ -61,6 +61,14 @@ public class DefaultAlbumService implements AlbumService {
         likeAlbum(user, album);
     }
 
+    @Override
+    public void likeAlbumByUserId(Long userId, Long albumId) {
+        var user = userRepository.findById(userId).get();
+        var album = albumRepository.findById(albumId).get();
+
+        likeAlbum(user, album);
+    }
+
     private void likeAlbum(User user, Album album) {
         user.getLikedAlbums().add(album);
         album.getLikes().add(user);

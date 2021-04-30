@@ -47,6 +47,14 @@ public class DefaultTrackService implements TrackService {
         likeTrack(user, track);
     }
 
+    @Override
+    public void likeTrackByUserId(Long userId, Long trackId) {
+        var user = userRepository.findById(userId).get();
+        var track = trackRepository.findById(trackId).get();
+
+        likeTrack(user, track);
+    }
+
     private void likeTrack(User user, Track track) {
         user.getLikedTracks().add(track);
         track.getLikes().add(user);

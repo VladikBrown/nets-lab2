@@ -6,11 +6,12 @@ import com.vladbrown.netslabs.lab2.core.service.ArtistService;
 import com.vladbrown.netslabs.lab2.core.service.TrackService;
 import com.vladbrown.netslabs.lab2.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserDetailsController {
 
@@ -27,52 +28,35 @@ public class UserDetailsController {
     private TrackService trackService;
 
     @GetMapping("/{userId}")
-    public String getUserInfo(@PathVariable String userId, Model model) {
-        model.addAttribute("user", userService.findById(Long.valueOf(userId)));
-        return "userDetails";
+    public User getUserInfo(@PathVariable String userId) {
+        User user = userService.findById(Long.valueOf(userId));
+        return user;
     }
 
     @PutMapping("/{userId}")
-    public String updateUserInfo(@PathVariable String userId, User user, Model model) {
+    public void updateUserInfo(@PathVariable String userId, User user) {
         user.setId(Long.valueOf(userId));
-        var savedUser = userService.save(user);
-        model.addAttribute("user", savedUser);
-        return "redirect:/user/" + savedUser.getId();
+        userService.save(user);
     }
 
     @DeleteMapping("/{userId}")
-    public String deleteUser(@PathVariable String userId, Model model) {
+    public void deleteUser(@PathVariable String userId) {
         userService.deleteById(Long.valueOf(userId));
-        return "redirect:/users";
     }
 
-    @GetMapping("/new")
-    public String getUserForm() {
-        return "userForm";
+    @PutMapping("/user/{userId}/artis/{artistId}")
+    public void likeArtist(@PathVariable String userId, @PathVariable String artistId) {
+        artistService.likeArtistByUserId(Long.valueOf(userId), Long.valueOf(artistId));
     }
 
-    @PostMapping("/likeArtist")
-    public String likeArtist(String artistId, String username) {
-        artistService.likeArtistByUsername(username, Long.valueOf(artistId));
-        return "redirect:/artists";
+    @PutMapping("/user/{userId}/album/{albumId}")
+    public void likeAlbum(@PathVariable String userId, @PathVariable String albumId) {
+        albumService.likeAlbumByUserId(Long.valueOf(userId), Long.valueOf(albumId));
     }
 
-    @PostMapping("/likeAlbum")
-    public String likeAlbum(String albumId, String username) {
-        albumService.likeAlbumByUsername(username, Long.valueOf(albumId));
-        return "redirect:/artist/" + albumService.findById(Long.valueOf(albumId)).getArtist().getId();
+    @PutMapping("/user/{userId}/track/{trackId}")
+    public void likeTrack(@PathVariable String userId, @PathVariable String trackId) {
+        trackService.likeTrackByUserId(Long.valueOf(userId), Long.valueOf(trackId));
     }
 
-    @PostMapping("/likeTrack")
-    public String likeTrack(String trackId, String username) {
-        trackService.likeTrackByUsername(username, Long.valueOf(trackId));
-        return "redirect:/artist/" + trackService.findById(Long.valueOf(trackId)).getAlbum().getArtist().getId();
-    }
-
-    @PostMapping("/new")
-    public String postUser(User user) {
-        System.out.println(user);
-        var savedUser = userService.save(user);
-        return "redirect:/users";
-    }
 }

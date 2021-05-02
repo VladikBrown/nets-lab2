@@ -21,8 +21,9 @@ public class UserListController {
     }
 
 
-    @PostMapping()
-    public User postUser(User user) {
+    @PostMapping
+    public User postUser(@RequestBody User user) {
+        System.out.println(user);
         return userService.save(user);
     }
 }

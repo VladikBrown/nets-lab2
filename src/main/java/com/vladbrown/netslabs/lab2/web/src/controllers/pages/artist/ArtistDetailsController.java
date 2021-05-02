@@ -20,7 +20,7 @@ public class ArtistDetailsController {
     }
 
     @PutMapping("/{artistId}")
-    public Artist updateArtistInfo(@PathVariable String artistId, Artist artist) {
+    public Artist updateArtistInfo(@PathVariable String artistId, @RequestBody Artist artist) {
         artist.setId(Long.valueOf(artistId));
         Artist savedArtist = artistService.save(artist);
         return savedArtist;
@@ -33,7 +33,7 @@ public class ArtistDetailsController {
 
 
     @PostMapping("/{artistId}/album")
-    public Artist addNewAlbum(@PathVariable String artistId, Album album) {
+    public Artist addNewAlbum(@PathVariable String artistId, @RequestBody Album album) {
         artistService.addNewAlbum(artistId, album);
         return artistService.findById(Long.valueOf(artistId));
     }

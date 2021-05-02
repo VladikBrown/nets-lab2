@@ -19,7 +19,7 @@ public class AlbumDetailsController {
     }
 
     @PutMapping("/{albumId}")
-    public void updateAlbum(@PathVariable String albumId, Album album){
+    public void updateAlbum(@PathVariable String albumId, @RequestBody Album album){
         album.setId(Long.valueOf(albumId));
         albumService.save(album);
     }
@@ -30,7 +30,7 @@ public class AlbumDetailsController {
     }
 
     @PostMapping("/{albumId}/track")
-    public Album addNewTrack(@PathVariable String albumId, Track track) {
+    public Album addNewTrack(@PathVariable String albumId, @RequestBody Track track) {
         albumService.addNewTrack(albumId, track);
         return albumService.findById(Long.valueOf(albumId));
     }

@@ -1,5 +1,8 @@
 package com.vladbrown.netslabs.lab2.core.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -19,10 +22,12 @@ public class Artist {
     @Column(name = "description")
     private String description;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "artist")
     private Set<Album> albums;
 
-    @ManyToMany(mappedBy = "likedArtists")
+    @JsonBackReference
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedArtists")
     private Set<User> likes;
 
     public Artist() {

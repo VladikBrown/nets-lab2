@@ -1,5 +1,7 @@
 package com.vladbrown.netslabs.lab2.core.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -21,6 +23,7 @@ public class User {
     @Column(name = "username")
     private String userName;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "user2track",
@@ -29,6 +32,7 @@ public class User {
     )
     private Set<Track> likedTracks;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "user2album",
@@ -37,6 +41,7 @@ public class User {
     )
     private Set<Album> likedAlbums;
 
+    @JsonManagedReference
     @ManyToMany
     @JoinTable(
             name = "user2artist",

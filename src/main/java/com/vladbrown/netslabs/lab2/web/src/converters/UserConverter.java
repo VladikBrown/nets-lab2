@@ -23,6 +23,7 @@ public class UserConverter implements Converter<User, UserData> {
 
     @Override
     public UserData convert(User user, UserData userData) {
+        userData.setId(user.getId());
         userData.setFirstName(user.getFirstName());
         userData.setSecondName(user.getSecondName());
         userData.setUserName(user.getUserName());

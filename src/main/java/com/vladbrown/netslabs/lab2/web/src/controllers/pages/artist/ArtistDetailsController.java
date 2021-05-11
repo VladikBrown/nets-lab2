@@ -3,9 +3,12 @@ package com.vladbrown.netslabs.lab2.web.src.controllers.pages.artist;
 import com.vladbrown.netslabs.lab2.core.domain.entity.Album;
 import com.vladbrown.netslabs.lab2.core.domain.entity.Artist;
 import com.vladbrown.netslabs.lab2.core.service.ArtistService;
+import com.vladbrown.netslabs.lab2.web.src.converters.ArtistConverter;
+import com.vladbrown.netslabs.lab2.web.src.dto.ArtistData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/artist")
 public class ArtistDetailsController {
@@ -13,17 +16,20 @@ public class ArtistDetailsController {
     @Autowired
     private ArtistService artistService;
 
+    @Autowired
+    private ArtistConverter artistConverter;
+
     @GetMapping("/{artistId}")
-    public Artist getArtist(@PathVariable String artistId) {
+    public ArtistData getArtist(@PathVariable String artistId) {
         Artist artist = artistService.findById(Long.valueOf(artistId));
-        return artist;
+        return artistConverter.convert(artist);
     }
 
     @PutMapping("/{artistId}")
-    public Artist updateArtistInfo(@PathVariable String artistId, @RequestBody Artist artist) {
+    public ArtistData updateArtistInfo(@PathVariable String artistId, @RequestBody Artist artist) {
         artist.setId(Long.valueOf(artistId));
         Artist savedArtist = artistService.save(artist);
-        return savedArtist;
+        return artistConverter.convert(savedArtist);
     }
 
     @DeleteMapping("/{artistId}")
@@ -33,8 +39,9 @@ public class ArtistDetailsController {
 
 
     @PostMapping("/{artistId}/album")
-    public Artist addNewAlbum(@PathVariable String artistId, @RequestBody Album album) {
+    public ArtistData addNewAlbum(@PathVariable String artistId, @RequestBody Album album) {
         artistService.addNewAlbum(artistId, album);
-        return artistService.findById(Long.valueOf(artistId));
+        var artist =  artistService.findById(Long.valueOf(artistId));
+        return artistConverter.convert(artist);
     }
 }

@@ -22,11 +22,9 @@ public class Artist {
     @Column(name = "description")
     private String description;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "artist")
     private Set<Album> albums;
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedArtists")
     private Set<User> likes;
 

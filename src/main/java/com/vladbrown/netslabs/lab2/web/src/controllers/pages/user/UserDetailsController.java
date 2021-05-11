@@ -5,12 +5,12 @@ import com.vladbrown.netslabs.lab2.core.service.AlbumService;
 import com.vladbrown.netslabs.lab2.core.service.ArtistService;
 import com.vladbrown.netslabs.lab2.core.service.TrackService;
 import com.vladbrown.netslabs.lab2.core.service.UserService;
+import com.vladbrown.netslabs.lab2.web.src.converters.UserConverter;
+import com.vladbrown.netslabs.lab2.web.src.dto.UserData;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserDetailsController {
@@ -27,10 +27,13 @@ public class UserDetailsController {
     @Autowired
     private TrackService trackService;
 
+    @Autowired
+    private UserConverter userConverter;
+
     @GetMapping("/{userId}")
-    public User getUserInfo(@PathVariable String userId) {
+    public UserData getUserInfo(@PathVariable String userId) {
         User user = userService.findById(Long.valueOf(userId));
-        return user;
+        return userConverter.convert(user);
     }
 
     @PutMapping("/{userId}")

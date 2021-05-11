@@ -20,12 +20,10 @@ public class Track {
     @Column(name = "is_single")
     private Boolean isSingle;
 
-    @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "album_id", nullable = false)
     private Album album;
 
-    @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "likedTracks")
     private Set<User> likes;
 

@@ -8,13 +8,13 @@ public class UserData {
 
     private String secondName;
 
-    private String nickname;
+    private String userName;
 
     private List<ArtistData> likedArtists;
 
     private List<AlbumData> likedAlbums;
 
-    private List<TrackData> trackData;
+    private List<TrackData> likedTracks;
 
     public String getFirstName() {
         return firstName;
@@ -32,12 +32,12 @@ public class UserData {
         this.secondName = secondName;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUserName(String nickname) {
+        this.userName = nickname;
     }
 
     public List<ArtistData> getLikedArtists() {
@@ -56,11 +56,11 @@ public class UserData {
         this.likedAlbums = likedAlbums;
     }
 
-    public List<TrackData> getTrackData() {
-        return trackData;
+    public List<TrackData> getLikedTracks() {
+        return likedTracks;
     }
 
-    public void setTrackData(List<TrackData> trackData) {
-        this.trackData = trackData;
+    public void setLikedTracks(List<TrackData> likedTracks) {
+        this.likedTracks = likedTracks;
     }
 }

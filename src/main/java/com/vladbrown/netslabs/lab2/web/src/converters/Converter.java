@@ -6,7 +6,7 @@ public interface Converter<Source, Target> {
 
     Target convert(Source source);
 
-    void convert(Source source, Target target);
+    Target convert(Source source, Target target);
 
-    List<Target> convertAll(Source source);
+    List<Target> convertAll(List<Source> source);
 }

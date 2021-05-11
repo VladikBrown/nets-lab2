@@ -23,8 +23,7 @@ public class User {
     @Column(name = "username")
     private String userName;
 
-    @JsonManagedReference
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user2track",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -32,8 +31,7 @@ public class User {
     )
     private Set<Track> likedTracks;
 
-    @JsonManagedReference
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user2album",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -41,8 +39,7 @@ public class User {
     )
     private Set<Album> likedAlbums;
 
-    @JsonManagedReference
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "user2artist",
             joinColumns = @JoinColumn(name = "user_id"),

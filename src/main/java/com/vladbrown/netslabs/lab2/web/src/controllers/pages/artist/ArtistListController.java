@@ -3,6 +3,8 @@ package com.vladbrown.netslabs.lab2.web.src.controllers.pages.artist;
 
 import com.vladbrown.netslabs.lab2.core.domain.entity.Artist;
 import com.vladbrown.netslabs.lab2.core.service.ArtistService;
+import com.vladbrown.netslabs.lab2.web.src.converters.ArtistConverter;
+import com.vladbrown.netslabs.lab2.web.src.dto.ArtistData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,9 +18,12 @@ public class ArtistListController {
     @Autowired
     private ArtistService artistService;
 
+    @Autowired
+    private ArtistConverter artistConverter;
+
     @GetMapping
-    public List<Artist> getArtists() {
-        return artistService.findAll();
+    public List<ArtistData> getArtists() {
+        return artistConverter.convertAll(artistService.findAll());
     }
 
     @PostMapping

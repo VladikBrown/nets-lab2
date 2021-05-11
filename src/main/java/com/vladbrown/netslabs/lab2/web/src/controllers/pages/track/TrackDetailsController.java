@@ -19,7 +19,7 @@ public class TrackDetailsController {
     }
 
     @PutMapping("/{trackId}")
-    public void addNewTrack(@PathVariable String trackId, Track track) {
+    public void addNewTrack(@PathVariable String trackId, @RequestBody Track track) {
         track.setId(Long.valueOf(trackId));
         trackService.save(track);
     }

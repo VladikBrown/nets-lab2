@@ -39,9 +39,9 @@ public class ArtistDetailsController {
 
 
     @PostMapping("/{artistId}/album")
-    public ArtistData addNewAlbum(@PathVariable String artistId, @RequestBody Album album) {
+    public Artist addNewAlbum(@PathVariable String artistId, @RequestBody Album album) {
         artistService.addNewAlbum(artistId, album);
         var artist =  artistService.findById(Long.valueOf(artistId));
-        return artistConverter.convert(artist);
+        return artist;
     }
 }

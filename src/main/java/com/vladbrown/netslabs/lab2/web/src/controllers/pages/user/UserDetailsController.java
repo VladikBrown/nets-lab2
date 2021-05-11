@@ -37,7 +37,7 @@ public class UserDetailsController {
     }
 
     @PutMapping("/{userId}")
-    public void updateUserInfo(@PathVariable String userId, User user) {
+    public void updateUserInfo(@PathVariable String userId, @RequestBody User user) {
         user.setId(Long.valueOf(userId));
         userService.save(user);
     }

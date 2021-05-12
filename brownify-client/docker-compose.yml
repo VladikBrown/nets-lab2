@@ -6,6 +6,8 @@ services:
     build:
       context: brownify-client
       dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: "http://localhost:8080"
     ports:
       - 3000:3000
     depends_on:
@@ -20,7 +22,7 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - db
+      - db1
     restart: unless-stopped
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
@@ -30,9 +32,9 @@ services:
       - SPRING_DATA_SOURCE_INITIALIZATION_MODE=always
       - SPRING_DATASOURCE_CONTINUE_ON_ERROR=true
 
-  db:
+  db1:
     image: 'postgres:13.1-alpine'
-    container_name: db
+    container_name: db1
     environment:
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=resu

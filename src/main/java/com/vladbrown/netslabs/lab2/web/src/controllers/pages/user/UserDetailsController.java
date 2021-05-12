@@ -47,7 +47,7 @@ public class UserDetailsController {
         userService.deleteById(Long.valueOf(userId));
     }
 
-    @PutMapping("/{userId}/artis/{artistId}")
+    @PutMapping("/{userId}/artist/{artistId}")
     public void likeArtist(@PathVariable String userId, @PathVariable String artistId) {
         artistService.likeArtistByUserId(Long.valueOf(userId), Long.valueOf(artistId));
     }
